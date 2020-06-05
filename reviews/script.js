@@ -1,3 +1,71 @@
+
+
+// get elements
+// const img = document.getElementById('person-img');
+// const author = document.getElementById('author');
+// const job = document.getElementById('job');
+// const info = document.getElementById('info');
+
+// const prevBtn = document.querySelector('.prev-btn');
+// const nextBtn = document.querySelector('.next-btn');
+// const randomBtn = document.querySelector('.random-btn');
+
+
+// let currentItem = 0;
+
+// // load initialItem
+// window.addEventListener('DOMContentLoaded', () => {
+//    showPerson()
+// })
+
+
+// // show person based on item
+// function showPerson(){
+//     const item = reviews[currentItem]
+//     img.src = item.img;
+//     author.textContent = item.name;
+//     job.textContent = item.job;
+//     info.textContent = item.text;
+// }
+
+// // /show next person
+// nextBtn.addEventListener('click', function(){
+//     currentItem++
+    
+//     if(currentItem > reviews.length - 1){
+//         currentItem = 0
+
+//     }
+//     showPerson();
+    
+// })
+
+// // /show next person
+// prevBtn.addEventListener('click', function(){
+//     currentItem--;
+    
+//     if(currentItem < 0){
+//         currentItem = reviews.length - 1;
+
+//     }
+//     showPerson();
+    
+// })
+
+
+// randomBtn.addEventListener('click', function() {
+//     // select a random image from 0 - reviews.length -1
+//     let rnd = Math.floor(Math.random() * reviews.length);
+//     console.log(rnd);
+//     currentItem = rnd;
+//     if(rnd < 0){
+//         currentItem = reviews.length - 1;
+//     }
+//     showPerson(rnd)
+    
+// })
+
+
 // local reviews data
 const reviews = [
     {
@@ -39,67 +107,63 @@ const reviews = [
 ];
 
 
-// get elements
-const img = document.getElementById('person-img');
-const author = document.getElementById('author');
-const job = document.getElementById('job');
-const info = document.getElementById('info');
 
-const prevBtn = document.querySelector('.prev-btn');
-const nextBtn = document.querySelector('.next-btn');
-const randomBtn = document.querySelector('.random-btn');
+let personImg = document.getElementById('person-img');
+let author = document.getElementById('author');
+let job = document.getElementById('job');
+let info = document.getElementById('info');
+let prevBtn = document.querySelector('.prev-btn');
+let nextBtn = document.querySelector('.next-btn');
+let randBtn = document.querySelector('.random-btn');
 
 
-let currentItem = 0;
+console.log(reviews);
+// we will use this to iterate
+currentItem = 0;
 
-// load initialItem
-window.addEventListener('DOMContentLoaded', () => {
-   showPerson()
+// create a function for the display
+function display () {
+    personImg.src = reviews[currentItem].img;
+    author.textContent = reviews[currentItem].name;
+    job.textContent = reviews[currentItem].job;
+    info.textContent = reviews[currentItem].text;
+}
+// as the page loads I want to set the reviews to the first item in the array
+window.addEventListener('DOMContentLoaded', function() {
+    display();
 })
 
 
-// show person based on item
-function showPerson(){
-    const item = reviews[currentItem]
-    img.src = item.img;
-    author.textContent = item.name;
-    job.textContent = item.job;
-    info.textContent = item.text;
-}
-
-// /show next person
+// create a click event listener on nextbtn that will increase curent item
 nextBtn.addEventListener('click', function(){
-    currentItem++
+    currentItem++;
     
     if(currentItem > reviews.length - 1){
-        currentItem = 0
-
+        currentItem = 0;
+        
     }
-    showPerson();
+    display()
+        
     
 })
 
-// /show next person
-prevBtn.addEventListener('click', function(){
+
+prevBtn.addEventListener('click', function (){
     currentItem--;
-    
     if(currentItem < 0){
-        currentItem = reviews.length - 1;
-
+        currentItem = reviews.length - 1
     }
-    showPerson();
-    
+    display();
 })
 
 
-randomBtn.addEventListener('click', function() {
-    // select a random image from 0 - reviews.length -1
-    let rnd = Math.floor(Math.random() * reviews.length);
-    console.log(rnd);
-    currentItem = rnd;
-    if(rnd < 0){
-        currentItem = reviews.length - 1;
-    }
-    showPerson(rnd)
-    
+randBtn.addEventListener('click', function() {
+    // get a random number from 0 - reviews.length
+    let rndNum = Math.floor(Math.random() * reviews.length);
+    currentItem = rndNum;
+    display(rndNum);
+    console.log(rndNum);
 })
+
+
+
